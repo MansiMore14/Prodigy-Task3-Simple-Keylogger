@@ -1,0 +1,42 @@
+# Specify the file name where keystrokes will be logged
+keystroke_log = "logs.txt"
+
+# Define a function to handle keypress events
+def capture_key_press(key):
+    # Open the log file in append mode
+    with open(keystroke_log, "a") as log:
+        # Try to process normal alphanumeric keys
+        try:
+            log.write(key)
+        except AttributeError:
+            # Handle special keys (space, enter, backspace, etc.)
+            if key == " ":
+                log.write(" ")
+            elif key == "\n":
+                log.write("\n")
+            elif key == "[Backspace]":
+                log.write("[Backspace]")
+            else:
+                log.write(f"[{key}]")
+
+# Function to handle key release events 
+def handle_key_release(key):
+    # Placeholder for handling key release
+    pass
+
+
+def simulate_key_presses():
+    # List of simulated keys (you can add more keys for testing)
+    simulated_keys = ['H', 'e', 'l', 'l', 'o', ' ', 'W', 'o', 'r', 'l', 'd', '\n', '[Backspace]']
+
+    for key in simulated_keys:
+        capture_key_press(key)
+
+# Main function to run the simulation
+def main():
+    simulate_key_presses()
+    print(f"Keystrokes logged in {keystroke_log}")
+
+
+if __name__ == "__main__":
+    main()
